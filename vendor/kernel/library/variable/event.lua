@@ -230,6 +230,9 @@ EVENT = {
         --- 技能生效
         ---@alias noteOnAbilityEffectiveData noteOnAbilityBase|{triggerItem:Item,targetUnit:Unit,targetX:number,targetY:number,targetZ:number}
         Effective = "abilityEffective",
+        --- 技能持续施法每周期时（动作时）
+        ---@alias noteOnAbilityCastingData noteOnAbilityBase|{triggerItem:Item,targetUnit:Unit,targetX:number,targetY:number,targetZ:number}
+        Casting = "abilityCasting",
         --- 施放技能结束（只有持续施法有结束状态）
         ---@alias noteOnAbilityStopData noteOnAbilityBase
         Stop = "abilityStop",

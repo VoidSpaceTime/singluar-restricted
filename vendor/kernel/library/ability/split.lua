@@ -33,7 +33,7 @@ function ability.split(options)
             x = targetUnit.x(), y = targetUnit.y(), radius = radius,
             ---@param enumUnit Unit
             filter = function(enumUnit)
-                return enumUnit.isAlive() and enumUnit.isSelf(targetUnit) == false and enumUnit.isAlly(targetUnit.owner())
+                return enumUnit.isAlive() and enumUnit.isSelf(targetUnit) == false and sourceUnit.isEnemy(enumUnit.owner())
             end
         })
         if (#enumUnits > 0) then

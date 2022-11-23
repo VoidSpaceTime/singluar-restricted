@@ -57,6 +57,16 @@ function _.modelScale(modify) end
 ---@return self|number
 function _.animateScale(modify) end
 
+--- 发动施法动作
+---@param modify string|nil
+---@return self|string
+function _.castAnimation(modify) end
+
+--- 持续施法动作
+---@param modify string|nil
+---@return self|string
+function _.keepAnimation(modify) end
+
 --- 单位攻击动作击出比率点[%]
 --- 默认0.8，范围[0-1.5]
 ---@param modify number|nil
