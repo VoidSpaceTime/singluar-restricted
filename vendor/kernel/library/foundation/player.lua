@@ -493,9 +493,6 @@ end)
 ---@param deadUnit Unit
 player.evtKill = function(deadUnit)
     local killer = deadUnit.lastHurtSource()
-    if (killer ~= nil) then
-        killer.owner().kill("+=1")
-    end
     deadUnit.prop("isAlive", false)
     --- 触发击杀事件
     if (killer ~= nil) then

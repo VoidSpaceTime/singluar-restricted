@@ -148,22 +148,6 @@ function _.selection() end
 ---@return number
 function _.apm() end
 
---- 死亡数量
----@return number
-function _.dead() end
-
---- 杀敌数量
----@return number
-function _.kill() end
-
---- 总受伤
----@return number
-function _.hurt() end
-
---- 总伤害
----@return number
-function _.damage() end
-
 --- 令玩家退出
 ---@param reason string 原因
 function _.quit(reason) end

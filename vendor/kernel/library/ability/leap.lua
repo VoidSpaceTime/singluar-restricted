@@ -97,7 +97,7 @@ function ability.leap(options)
     local dtStep = distance0 / speed / frequency
     local dtSpd = 1 / dtStep
 
-    local height = sPoint[3] + options.height or 0
+    local height = sPoint[3] + (tPoint[3] - sPoint[3]) * 0.5 + (options.height or 0)
 
     local shake = options.shake
     local shakeOffset = options.shakeOffset or distance0 / 2
@@ -111,7 +111,7 @@ function ability.leap(options)
 
     local facing = math.angle(sPoint[1], sPoint[2], tPoint[1], tPoint[2])
     local mx, my = math.polar(sPoint[1], sPoint[2], shakeOffset, facing + shake)
-    local mPoint = { mx, my, 1.5 * height }
+    local mPoint = { mx, my, height }
 
     if (options.animate) then
         sourceUnit.animate(options.animate)

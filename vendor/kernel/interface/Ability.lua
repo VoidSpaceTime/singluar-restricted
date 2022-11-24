@@ -52,6 +52,10 @@ function _.exp(modify) end
 ---@return number
 function _.expNeed(whichLevel) end
 
+--- 进入冷却
+---@return void
+function _.coolingEnter() end
+
 --- 立即冷却
 ---@return void
 function _.coolingInstant() end
