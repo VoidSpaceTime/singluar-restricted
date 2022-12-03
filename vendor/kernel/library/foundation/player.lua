@@ -411,7 +411,7 @@ player.evtOrder = J.Condition(function()
     local orderId = J.GetIssuedOrderId()
     local orderTargetUnit = J.GetOrderTargetUnit()
     local tx, ty, tz
-    if (orderTargetUnit ~= nil) then
+    if (orderTargetUnit ~= 0) then
         tx = J.GetUnitX(orderTargetUnit)
         ty = J.GetUnitY(orderTargetUnit)
         tz = japi.Z(tx, ty)

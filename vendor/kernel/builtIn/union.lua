@@ -79,7 +79,7 @@ _assets_model = function(path, alias, class, options)
 end
 
 --- 不支持原生音频！
---- 只支持mp3
+--- 只支持mp3，不建议使用推荐以外其他规格否则质量下降且有可能无法播放
 --- 音效荐：48000HZ 192K 单
 --- 音乐荐：48000HZ 320K 单
 ---@type fun(path:string, alias:string|nil, soundType:string | "vcm"| "v3d" | "bgm" | "vwp"):void
