@@ -1,23 +1,23 @@
 ---@class Buff:Object
 ---@param obj Object 作用对象
----@param name string
+---@param key string
 ---@param duration number
 ---@param diff number 差异额
 ---@param purpose fun(buffObj:Object):void
 ---@param rollback fun(buffObj:Object):void
 ---@return nil|Buff
-function Buff(obj, name, duration, diff, purpose, rollback)
+function Buff(obj, key, duration, diff, purpose, rollback)
     if (type(obj) ~= "table" and obj.id() == nil) then
         return nil
     end
-    if (name == nil) then
+    if (key == nil) then
         return nil
     end
     duration = duration or -1
     obj = obj
     diff = diff or 0
     return Object("Buff", {
-        name = name,
+        key = key,
         duration = duration,
         diff = diff,
         purpose = purpose,
@@ -35,7 +35,7 @@ end
 --- buff提取器
 ---@param obj Object 作用对象
 ---@alias forwardType boolean 正序(true)|反序(false)
----@alias buffFilter {forward:forwardType,name:string,diff:any,limit:number,filter:fun(enumBuff:Buff)}
+---@alias buffFilter {forward:forwardType,key:string,diff:any,limit:number,filter:fun(enumBuff:Buff)}
 ---@param options buffFilter
 ---@return Buff[]
 function BuffCatcher(obj, options)
@@ -65,8 +65,8 @@ function BuffCatcher(obj, options)
                     if (#catch >= options.limit) then
                         return false
                     end
-                    if (type(options.name) == "string") then
-                        if (options.name ~= enumBuff.name()) then
+                    if (type(options.key) == "string") then
+                        if (options.key ~= enumBuff.key()) then
                             return
                         end
                     end

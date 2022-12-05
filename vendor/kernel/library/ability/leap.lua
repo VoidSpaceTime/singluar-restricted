@@ -183,7 +183,7 @@ function ability.leap(options)
         if (type(options.onMove) == "function") then
             local mRes = options.onMove(options, cPoint)
             if (mRes == false) then
-                destroy(curTimer)
+                curTimer.destroy()
                 _leapEnding(false, options, cPoint)
                 return
             end

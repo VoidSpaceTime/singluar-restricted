@@ -15,9 +15,30 @@ function _.remain(variety) end
 ---@return Object
 function _.obj() end
 
---- 名词
+--- key
 ---@return string
-function _.name() end
+function _.key() end
+
+--- 名称，默认nil
+---@param modify nil|string
+---@return self|string|nil
+function _.name(modify) end
+
+--- 可视判断
+--- 可根据此值决定UI显隐等，默认true
+---@param modify nil|boolean
+---@return self|boolean
+function _.visible(modify) end
+
+--- 状态图标，默认nil
+---@param modify nil|string
+---@return self|string
+function _.icon(modify) end
+
+--- 状态描述体，默认nil
+---@param modify nil|string[]|string|fun(obj:Buff):string[]
+---@return self|string[]
+function _.description(modify) end
 
 --- 差异值
 ---@return number
