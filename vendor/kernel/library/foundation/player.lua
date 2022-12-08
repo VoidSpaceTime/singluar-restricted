@@ -200,7 +200,15 @@ player.evtDamaged = function(sourceUnit, targetUnit)
                     shake = m.shake(),
                     shakeOffset = m.shakeOffset(),
                     reflex = m.reflex(),
+                    --[[
+                        虚拟箭矢对象 可通过prop 关键字 "onEnd","onMove" , 添加附带公式
+                    ]]
+                    onMove = m.prop("onMove") or true, -- 添加
                     onEnd = function(opt, point)
+                        local onEnd = opt.sourceUnit.missile().prop("onEned") -- 添加
+                        if type(onEnd) == "function" then
+                            onEnd(opt, point)
+                        end
                         if (math.distance(point[1], point[2], opt.targetUnit.x(), opt.targetUnit.y()) <= 100) then
                             player.evtDamagedArrived(opt.sourceUnit, opt.targetUnit)
                             return true

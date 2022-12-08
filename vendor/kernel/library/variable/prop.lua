@@ -82,8 +82,31 @@ DAMAGE_SRC = {
 ---@type table<string,{value:string,label:string}>
 DAMAGE_TYPE = {
     common = { value = "common", label = "常规" },
+    magic = { value = "magic", label = "魔法" },
+
+    Physics = { value = "Physics", label = "物理" },
+    energy = { value = "energy", label = "能量" },
+    Physics_AP = { value = "Physics_AP", label = "物理-破甲" },
+    Physics_HE = { value = "Physics_HE", label = "物理-高爆" },
+    Physics_APHE = { value = "Physics_APHE", label = "物理-破甲高爆" },
+    Unknown = { value = "Unknown", label = "未知" },
+    real = { value = "real", label = "真实" },
 }
+
+---@class DEFEND_TYPE 防御类型
+---@type table<string,{value:string,label:string}>
+DEFEND_TYPE = {
+    common = { value = "common", label = "常规" },
+    none = { value = "none", label = "无护甲" },
+    Kevlar = { value = "Kevlar", label = "凯夫拉" },
+    Metal = { value = "Metal", label = "金属" },
+    Concrete = { value = "Concrete", label = "混凝土" },
+    High_Density = { value = "High_Density", label = "高密度" },
+}
+
+DEFEND_TYPE_KEYS = { "common" }
 DAMAGE_TYPE_KEYS = { "common" }
+ATTACK_TYPE_KEYS = { "common" }
 
 ---@class BREAK_ARMOR 无视防御种类
 ---@type table<string,{value:string,label:string}>

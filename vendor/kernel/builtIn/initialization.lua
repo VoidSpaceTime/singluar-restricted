@@ -110,10 +110,10 @@ INITIALIZATION = function()
     FrameGameUI = Frame("UI_GAME", japi.DzGetGameUI(), nil)
 
     --- 玩家初始化
-    PlayerAggressive = Player(PLAYER_NEUTRAL_AGGRESSIVE + 1)
+    PlayerAggressive = Player(PLAYER_NEUTRAL_AGGRESSIVE + 1)   
     PlayerVictim = Player(PLAYER_NEUTRAL_VICTIM + 1)
     PlayerExtra = Player(PLAYER_NEUTRAL_EXTRA + 1)
-    PlayerPassive = Player(PLAYER_NEUTRAL_PASSIVE + 1)
+    PlayerPassive = Player(PLAYER_NEUTRAL_PASSIVE + 1) -- 绝对中立
     for i = 1, BJ_MAX_PLAYER_SLOTS, 1 do Player(i) end
 
     --- 音乐

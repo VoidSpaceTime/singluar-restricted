@@ -325,3 +325,30 @@ function math.cale(variety, base)
     end
     return val, diff
 end
+
+---圆形均匀散布
+---@param x number
+---@param y number
+---@param radius number
+---@return number
+---@return number
+function math.evenlyDispersed(x, y, radius)
+    local random = math.rand(1, 100) / 100
+    local r = math.sqrt(random) * radius
+    random = math.rand(1, 100) / 100
+    local o = 2 * math.pi * random
+
+    local x, y = x + r * math.cos(o), y + r * math.sin(o) -- *0.5 ,想要椭圆的话,偏移量*比例系数
+    return x, y
+end
+
+---返回两个对象的距离
+---@param Unit1 Unit|Item 目标
+---@param Unit2 Unit|Item 目标
+---@return number
+function math.distanceObj(Unit1, Unit2)
+    if (isObject(Unit1, "Unit") or isObject(Unit1, "Item") and isObject(Unit2, "Unit") or isObject(Unit2, "Item")) then
+        return math.distance(Unit1.x(), Unit1.y(), Unit2.x(), Unit2.y())
+    end
+    return -1
+end
