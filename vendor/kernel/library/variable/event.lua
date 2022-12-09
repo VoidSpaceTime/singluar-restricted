@@ -282,4 +282,16 @@ EVENT = {
         ---@alias noteOnDecoDestroyData noteOnDestructableBase
         Destroy = "destructableDestroy",
     },
+    ---@alias noteOnAIBase {triggerAI:AI}
+    AI = {
+        --- AI毁灭
+        ---@alias noteOnAIDestroyData noteOnAIBase
+        Destroy = "aiDestroy",
+        --- 关连单位
+        ---@alias noteOnAILinkData noteOnAIBase|{triggerUnit:Unit}
+        Link = "aiLink",
+        --- 断连单位
+        ---@alias noteOnAIUnlinkData noteOnAIBase|{triggerUnit:Unit}
+        Unlink = "aiUnlink",
+    }
 }

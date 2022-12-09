@@ -1,7 +1,7 @@
 ---@type ItemTpl
 local _
 
---- 通用型事件注册
+--- 本对象事件注册
 ---@param evt string 事件类型字符
 ---@vararg string|fun(callData:table)
 ---@return self
