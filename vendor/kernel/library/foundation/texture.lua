@@ -55,7 +55,7 @@ function texture.alertCircle(diameter, x, y, duration, token, color, limit)
     J.handleRef(tmp.unit)
     J.SetUnitColor(tmp.unit, color)
     J.SetUnitScale(tmp.unit, modelScale, modelScale, modelScale)
-    tmp.timer = time.setTimeout(duration, function()
+    tmp.SurroundingTimer = time.setTimeout(duration, function()
         for k, v in ipairs(texture.limiter[token]) do
             print(v.unit, tmp.unit)
             if (v.unit == tmp.unit) then

@@ -93,11 +93,7 @@ DAMAGE_TYPE = {
     real = { value = "real", label = "真实" },
 }
 
-<<<<<<< HEAD
 ---@class DEFEND_TYPE 防御类型
-=======
----@class DEFEND_TYPE 伤害类型
->>>>>>> 9a3c05234a7804166efe91beb63c1c64e22e722f
 ---@type table<string,{value:string,label:string}>
 DEFEND_TYPE = {
     common = { value = "common", label = "常规" },

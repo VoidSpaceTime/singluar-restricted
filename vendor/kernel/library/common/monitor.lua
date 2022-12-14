@@ -40,7 +40,7 @@ function monitor.destroy(key)
         return
     end
     if (monitor._m[key] ~= nil) then
-        monitor._m[key].timer.destroy()
+        monitor._m[key].SurroundingTimer.destroy()
         monitor._m[key] = nil
     end
 end
