@@ -259,12 +259,7 @@ INITIALIZATION = function()
             if (isObject(it, "Item")) then
                 syncPlayer.selection().itemSlot().remove(it.itemSlotIndex())
                 syncPlayer.warehouseSlot().push(it)
-                local v = Vcm("war3_dropItem")
-                if (isObject(v, "Vcm")) then
-                    async.call(syncPlayer, function()
-                        v.play()
-                    end)
-                end
+                audio(Vcm("war3_dropItem"), syncPlayer)
             end
         elseif (command == "warehouse_to_item") then
             local itId = syncData.transferData[2]
@@ -273,12 +268,7 @@ INITIALIZATION = function()
             if (isObject(it, "Item")) then
                 syncPlayer.warehouseSlot().remove(it.warehouseSlotIndex())
                 syncPlayer.selection().itemSlot().push(it)
-                local v = Vcm("war3_pickItem")
-                if (isObject(v, "Vcm")) then
-                    async.call(syncPlayer, function()
-                        v.play()
-                    end)
-                end
+                audio(Vcm("war3_pickItem"), syncPlayer)
             end
         end
     end)

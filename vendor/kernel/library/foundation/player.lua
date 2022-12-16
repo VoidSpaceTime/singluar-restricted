@@ -118,10 +118,7 @@ player.evtDamagedArrived = function(sourceUnit, targetUnit)
         return
     end
     if (sourceUnit.weaponSoundMode() == 1) then
-        local v = Vwp(sourceUnit, targetUnit)
-        if (v) then
-            v.play()
-        end
+        audio(Vwp(sourceUnit, targetUnit))
     end
     local dmg = sourceUnit.attack() + math.rand(0, sourceUnit.attackRipple())
     if (dmg >= 0.1) then
@@ -298,10 +295,7 @@ player.evtAttacked = J.Condition(function()
             ag.set(curTimer.id(), nil)
             curTimer.destroy()
             if (attacker.weaponSoundMode() == 2) then
-                local v = Vwp(attacker, targetUnit)
-                if (v) then
-                    v.play()
-                end
+                audio(Vwp(attacker, targetUnit))
             end
             player.evtDamaged(attacker, targetUnit)
         end)
