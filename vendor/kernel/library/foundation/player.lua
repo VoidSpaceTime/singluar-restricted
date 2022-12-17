@@ -219,7 +219,9 @@ player.evtDamaged = function(sourceUnit, targetUnit)
                 ability.missile(options)
                 if (gatlin > 0) then
                     time.setInterval(0.25, function(gatlinTimer)
-                        if (gatlin <= 0 or false == isObject(sourceUnit, "Unit") or sourceUnit.isDead()) then
+                        if (gatlin <= 0
+                            or false == isObject(sourceUnit, "Unit") or sourceUnit.isDead()
+                            or false == isObject(targetUnit, "Unit") or targetUnit.isDead()) then
                             gatlinTimer.destroy()
                             return
                         end
