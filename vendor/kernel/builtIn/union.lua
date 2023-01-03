@@ -37,6 +37,32 @@ _assets_icon = function(path, alias)
     end
 end
 
+--[[-- 可破坏物
+    fogVis:number,  -- 迷雾中可见动画
+    showInMM:number,    -- 是否在小地图上显示
+    occH:number,    -- 闭塞高度
+    colorR:number,  --红
+    colorG:number,--绿
+    colorB:number,--蓝
+    minScale:number,-- 最小比例
+    maxScale:number, -- 最大比例
+    numVal:number, -- 模型样式总数
+    selectable:boolean -- 游戏中可选择
+    selcircsize -- 选择圈大小
+]]
+--[[ 单位
+unitSound:string,
+scale:number,
+modelScale:number,
+dmgpt1:number,
+backSw1:number,
+movetp:string,
+moveHeight:number,
+sight:number,
+cool1:number,
+targs1:string,
+Art:string
+]]
 --- 原生首符号加:冒号
 --- 只支持mdx,自动贴图路径必须war3mapTextures开头，文件放入assets/war3mapTextures内
 ---@alias noteAssetsModelUnitOptions {unitSound:string,scale:number,modelScale:number,dmgpt1:number,backSw1:number,movetp:string,moveHeight:number,sight:number,cool1:number,targs1:string,Art:string}
