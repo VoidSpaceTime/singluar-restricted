@@ -100,3 +100,7 @@ end
 terrain.isGround = function(x, y)
     return not terrain.isWalkableWater(x, y)
 end
+
+-- terrain.setAccess = function (x,y,allow)
+    
+-- end
