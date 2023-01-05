@@ -10,9 +10,10 @@ ability.addNative = function(targerUnit, id, duration)
     end
     if (duration == nil or duration <= 0) then
         J.UnitAddAbility(targerUnit.handle(), id)
-        -- J.UnitMakeAbilityPermanent(targerUnit.handle(), true, id)
+        J.UnitMakeAbilityPermanent(targerUnit.handle(), true, id)
     else
         J.UnitAddAbility(targerUnit.handle(), id)
+        J.UnitMakeAbilityPermanent(targerUnit.handle(), true, id)
         time.setTimeout(duration, function(t)
             t.destroy()
             J.UnitRemoveAbility(targerUnit.handle(), id)

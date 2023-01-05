@@ -50,18 +50,37 @@ end
     selectable:boolean -- 游戏中可选择
     selcircsize -- 选择圈大小
 ]]
---[[ 单位
-unitSound:string,
-scale:number,
-modelScale:number,
-dmgpt1:number,
-backSw1:number,
-movetp:string,
-moveHeight:number,
-sight:number,
-cool1:number,
-targs1:string,
-Art:string
+--[[ 单位   选择圈多 0.5是32，1应该是64 坐标
+
+    unitSound      = "", --单位声音
+    scale          = 1, --选择缩放
+    modelScale     = 1, --模型缩放
+    dmgpt1         = "", --攻击类型1
+    backSw1        = 0.64, -- 攻击动画回复点  发动攻击效果到完成攻击动作所需要的时间,该值大于(攻击间隔-动画伤害点)攻击完成后可以通过发布其他命令手动取消
+    movetp         = MOVE_TYPE_FOOT, --移动类型
+    moveHeight     = 0, -- 进决定动画模型的飞行高度,与穿越地形无关
+    sight          = 1000, --视野范围 白天
+    cool1          = 1, --攻速间隔,不会超过每秒45.6击
+    targs1         = "notself,debris,alive,ground,nonancient,nonhero,nonsapper,ancient,mechanical,structure,vulnerable,air,ward,item,organic,sapper", -- 目标类型
+    Art            = "", --显示图标
+    -------
+    collision      = 32 , --单位的实际体积大小,而非显示大小比如碰撞体积大的单位经过窄的路口会被堵住
+    selZ           = 0, --选择圈高度
+    occH           = 128, --单位站在有闭塞高度的非联盟建筑或可破坏物旁边会有局部实现被阻挡成锥形,就是所谓的闭塞,将该值设为0将不会有此效果
+    unitShadow     = "", --单位时阴影/可以用原生/贴图
+    buildingShadow = "", --建筑形态时阴影
+    fatLOS         = 0, --勾选该项则单位可以在不可见区域被显示. bool
+    targType       = "", --作为目标类型
+    hideOnMinimap  = 1, --隐藏小地图显示 bool
+    canSleep       = 0, --是否允许在夜晚睡眠,仅对中立敌对有效 bool
+    moveFloor      = 0, -- 最小飞行高度
+    ------- 测试性质
+   -- PathTextures\\StoneWall3Path.tga    -- 石头墙 丨
+   -- PathTextures\\StoneWall4Path.tga      -- 石头墙 丿
+   -- PathTextures\\StoneWall2Path.tga     -- 石头墙 乀
+   -- PathTextures\\StoneWall1Path.tga     -- 石头墙 一
+
+    pathTex = "PathTextures\\StoneWall3Path.tga"
 ]]
 --- 原生首符号加:冒号
 --- 只支持mdx,自动贴图路径必须war3mapTextures开头，文件放入assets/war3mapTextures内
