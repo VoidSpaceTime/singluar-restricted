@@ -41,15 +41,23 @@ ability.SetTerrainPathable = function(x, y, pathingType, flag)
         end
     end
 end
-
+--- 地形叠加态
+---@param x number
+---@param y number
+---@param type any
+---@param modify string
+---@return string
 ability.Superposition_Terrain = function(x, y, type, modify)
-    if not RectPlayable.isBorder(x, y) then
+    if x % 32 ~= 0 and y % 32 ~= 0 then
         x = math.round(x / 32) * 32
         y = math.round(y / 32) * 32
+    end
+    if not RectPlayable.isBorder(x, y) then
         local str = string.implode("|", { x, y, type })
         local tmp = Terrain_prop.get(str) or 1
         if Terrain_prop.get(str) then
-            Terrain_prop.set(str, math.cale(modify, Terrain_prop.get(str)))
+            local val, dif = math.cale(modify, Terrain_prop.get(str))
+            Terrain_prop.set(str, val)
         else
             local flag
             if type == PATHING_TYPE_WALKABILITY then -- 地面    复杂度太高了
@@ -74,8 +82,9 @@ ability.Superposition_Terrain = function(x, y, type, modify)
         if (tmp < 1 and Terrain_prop.get(str) < 1) or (tmp >= 1 and Terrain_prop.get(str) >= 1) then
         elseif (tmp < 1 and Terrain_prop.get(str) >= 1) then -- 获得效果
             ability.SetTerrainPathable(x, y, type, true)
-        elseif (tmp < 1 and Terrain_prop.get(str) >= 1) then -- 关闭效果
+        elseif (tmp >= 1 and Terrain_prop.get(str) < 1) then -- 关闭效果
             ability.SetTerrainPathable(x, y, type, false)
         end
+        return str
     end
 end
