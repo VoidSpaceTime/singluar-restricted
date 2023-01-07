@@ -88,4 +88,5 @@ ability.Superposition_Terrain = function(x, y, type, modify)
         end
         return str
     end
+    return ""
 end

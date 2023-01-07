@@ -74,13 +74,25 @@ end
     hideOnMinimap  = 1, --隐藏小地图显示 bool
     canSleep       = 0, --是否允许在夜晚睡眠,仅对中立敌对有效 bool
     moveFloor      = 0, -- 最小飞行高度
+
+    shadowH        = 0, -- 阴影高度
+    shadowW        = 0,--阴影宽度
+    shadowX        = 0,--x轴偏移
+    shadowY        = 0,--y轴偏移
+    
+    LoopingSoundFadeOut  = "0", -- 循环淡出率
+    LoopingSoundFadeIn  = "0", -- 循环淡入率
+    pathTex  = "", -- 路径纹理
+    uberSplat  = "", -- 建筑地面纹理
+    isbldg  = "0", -- 是一个建筑
+
     ------- 测试性质
    -- PathTextures\\StoneWall3Path.tga    -- 石头墙 丨
    -- PathTextures\\StoneWall4Path.tga      -- 石头墙 丿
    -- PathTextures\\StoneWall2Path.tga     -- 石头墙 乀
    -- PathTextures\\StoneWall1Path.tga     -- 石头墙 一
 
-    pathTex = "PathTextures\\StoneWall3Path.tga"
+    pathTex = "PathTextures\Gate1Path.tga"
 ]]
 --- 原生首符号加:冒号
 --- 只支持mdx,自动贴图路径必须war3mapTextures开头，文件放入assets/war3mapTextures内
