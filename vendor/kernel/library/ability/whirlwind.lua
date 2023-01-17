@@ -25,7 +25,7 @@ function ability.whirlwind(options)
     must(frequency > 0)
     must(duration > 0)
     must(duration >= frequency)
-    
+
     if (options.sourceUnit.isWhirlwind()) then
         return
     end
@@ -59,7 +59,7 @@ function ability.whirlwind(options)
                 key = "Unit",
                 x = options.sourceUnit.x(), y = options.sourceUnit.y(),
                 radius = radius,
-                func = filter
+                filter = filter
             })
             for _, eu in ipairs(enumUnits) do
                 if (options.enumModel ~= nil) then
