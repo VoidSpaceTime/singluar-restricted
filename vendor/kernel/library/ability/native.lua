@@ -30,7 +30,7 @@ local Terrain_prop = Array()
 ---@param flag any
 ability.SetTerrainPathable = function(x, y, pathingType, flag)
     -- local x = math.fmod (1266,  32 )
-    x = math.round(x / 32) * 32
+    x = math.round(x / 32) * 32 
     y = math.round(y / 32) * 32
     J.SetTerrainPathable(x, y, pathingType, flag)
     local str = string.implode("|", { x, y, pathingType })
@@ -80,8 +80,7 @@ ability.Superposition_Terrain = function(x, y, type, modify)
             if flag then i = 1 else i = 0 end
             Terrain_prop.set(str, math.cale(modify, i))
         end
-        if (tmp < 1 and Terrain_prop.get(str) < 1) or (tmp >= 1 and Terrain_prop.get(str) >= 1) then
-        elseif (tmp < 1 and Terrain_prop.get(str) >= 1) then -- 获得效果
+        if (tmp < 1 and Terrain_prop.get(str) >= 1) then -- 获得效果
             ability.SetTerrainPathable(x, y, type, true)
         elseif (tmp >= 1 and Terrain_prop.get(str) < 1) then -- 关闭效果
             ability.SetTerrainPathable(x, y, type, false)
