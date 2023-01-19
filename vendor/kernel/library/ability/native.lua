@@ -53,7 +53,7 @@ ability.Superposition_Terrain = function(x, y, type, modify)
         x = math.round(x / 32) * 32
         y = math.round(y / 32) * 32
     end
-    if not RectPlayable.isBorder(x, y) then
+    if RectPlayable.isBorder(x, y) == false then
         local str = string.implode("|", { x, y, type })
         local tmp = Terrain_prop.get(str) or 1
         if Terrain_prop.get(str) then
