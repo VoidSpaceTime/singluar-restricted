@@ -47,8 +47,8 @@ end
     modelAlias = nil, --[必须]虚拟箭矢的特效
     sourceUnit, --[必须]伤害来源
     targetUnit, --[可选]目标单位（有单位目标，那么冲击跟踪到单位就结束）
-    sourcePoint = number[3][可选]强制设定初始坐标
-    targetPoint = number[3][可选]强制设定目标坐标
+    sourcePoint = number[3] --[可选]强制设定初始坐标
+    targetPoint = number[3] --[可选]强制设定目标坐标
     animateScale = 1.00, --[可选]虚拟箭矢的动画速度，默认1
     scale = 1.00, --[可选]虚拟箭矢的模型缩放，默认1
     acceleration = 0, --[可选]冲击加速度，每个周期[0.02秒]都会增加一次
@@ -56,8 +56,10 @@ end
     speed = 500, --[可选]每秒冲击的距离，默认1秒500px
     height = 0, --[可选]飞跃高度，默认0
     shake = 0, --[可选]摇摆角度[number|'rand']默认0
-    shakeOffset = 50%, --[可选]摇摆偏移，默认为距离的50%
+    shakeOffset = 50, --[可选]摇摆偏移，默认为距离的50%
+    ---@noteAbilityMissileOnEvt
     onMove = noteAbilityMissileOnEvt, --[可选]每移动回调,当return false时可强行中止循环
+    ---@noteAbilityMissileOnEvt
     onEnd = noteAbilityMissileOnEvt, --[可选]结束回调
 ]]
 ---@alias noteAbilityMissileOptions {modelAlias:string,animateScale:number,scale:number,speed:number,acceleration:number,height:number,shake:number,shakeOffset:number,reflex:number,sourceUnit:Unit,targetUnit:Unit,sourcePoint:number[],targetPoint:number[],onMove:noteAbilityMissileOnEvt,onEnd:noteAbilityMissileOnEvt}

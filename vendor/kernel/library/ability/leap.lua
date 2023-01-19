@@ -1,7 +1,9 @@
 ---@private
 local function _leapEnding(isOK, options, point)
-    options.buff:rollback()
-    options.buff = nil
+    if options.buffOn == true then
+        options.buff:rollback()
+        options.buff = nil
+    end
     local qty = options.reflex or 0
     local res = isOK
     if (res == true) then
@@ -20,7 +22,8 @@ local function _leapEnding(isOK, options, point)
                     y = point[2],
                     radius = 600,
                     filter = function(enumUnit)
-                        return enumUnit.isOther(options.targetUnit) and enumUnit.isAlive() and enumUnit.isEnemy(options.sourceUnit.owner())
+                        return enumUnit.isOther(options.targetUnit) and enumUnit.isAlive() and
+                            enumUnit.isEnemy(options.sourceUnit.owner())
                     end,
                 })
                 if (isObject(nextUnit, "Unit")) then
@@ -48,7 +51,6 @@ local function _leapEnding(isOK, options, point)
     end
 end
 
-
 --[[
     冲锋
     sourceUnit, --[必须]冲锋单位，同时也是伤害来源
@@ -57,6 +59,7 @@ end
     modelAlias = nil, --[可选]冲锋单位origin特效
     animate = "attack", --冲锋动作
     animateScale = 1.00, --冲锋的动画速度
+    buffOn = ture , -- 是否启用buff,默认启用
     speed = 500, --每秒冲击的距离（可选的，默认1秒500px)
     acceleration = 0, --冲击加速度（可选的，每个周期[0.02秒]都会增加一次)
     height = 0, --飞跃高度（可选的，默认0)
@@ -88,7 +91,8 @@ function ability.leap(options)
     ---@type number[]
     local tPoint
     if (type(options.targetPoint) == "table") then
-        tPoint = { options.targetPoint[1], options.targetPoint[2], options.targetPoint[3] or japi.Z(options.targetPoint[1], options.targetPoint[2]) }
+        tPoint = { options.targetPoint[1], options.targetPoint[2],
+            options.targetPoint[3] or japi.Z(options.targetPoint[1], options.targetPoint[2]) }
     else
         tPoint = { options.targetUnit.x(), options.targetUnit.y(), options.targetUnit.h() }
     end
@@ -119,30 +123,32 @@ function ability.leap(options)
 
     local flyHeight0 = sourceUnit.flyHeight()
     local animateDiff = (options.animateScale or 1) - sourceUnit.animateScale()
-
-    options.buff = Buff(sourceUnit, "leap", -1, 0,
-        function(buffObj)
-            options.effectAttach = buffObj.attach(options.modelAlias, "origin", -1)
-            if (animateDiff ~= 0) then
-                buffObj.animateScale("+=" .. animateDiff)
+    options.buffOn = options.buffOn or true
+    if options.buffOn == true then
+        options.buff = Buff(sourceUnit, "leap", -1, 0,
+            function(buffObj)
+                options.effectAttach = buffObj.attach(options.modelAlias, "origin", -1)
+                if (animateDiff ~= 0) then
+                    buffObj.animateScale("+=" .. animateDiff)
+                end
+                buffObj.superposition("leap", "+=1")
+                buffObj.superposition("collision", "-=1")
+                buffObj.superposition("pause", "+=1")
+            end,
+            function(buffObj)
+                effect.destroy(options.effectAttach)
+                options.effectAttach = nil
+                if (animateDiff ~= 0) then
+                    buffObj.animateScale("-=" .. animateDiff)
+                end
+                buffObj.flyHeight(flyHeight0)
+                buffObj.superposition("pause", "-=1")
+                buffObj.superposition("collision", "+=1")
+                buffObj.superposition("leap", "-=1")
             end
-            buffObj.superposition("leap", "+=1")
-            buffObj.superposition("collision", "-=1")
-            buffObj.superposition("pause", "+=1")
-        end,
-        function(buffObj)
-            effect.destroy(options.effectAttach)
-            options.effectAttach = nil
-            if (animateDiff ~= 0) then
-                buffObj.animateScale("-=" .. animateDiff)
-            end
-            buffObj.flyHeight(flyHeight0)
-            buffObj.superposition("pause", "-=1")
-            buffObj.superposition("collision", "+=1")
-            buffObj.superposition("leap", "-=1")
-        end
-    )
-    options.buff.purpose()
+        )
+        options.buff.purpose()
+    end
 
     local dt = 0
     local distanceCur = distance0
