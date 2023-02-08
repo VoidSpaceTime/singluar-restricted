@@ -1,6 +1,7 @@
-* 【document】[https://singluar.hunzsig.org](https://singluar.hunzsig.org)
+【技术文档】[https://singluar.hunzsig.org](https://singluar.hunzsig.org)
 
-SingluarRestricted all tools have passed various function tests.
-It's your own problem that it's invalid and can't be executed.
-SingluarRestricted does not provide any support.
-If you use it, please solve all problems by yourself.
+### 此为Singluar框架公开版本
+
+##### 所有工具已通过功能测试
+
+##### 如无法使用，可自行解决问题
