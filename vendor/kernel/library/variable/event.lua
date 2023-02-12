@@ -257,6 +257,9 @@ EVENT = {
         --- 丢弃物品
         ---@alias noteOnItemDropData noteOnItemBase
         Drop = "itemDrop",
+        --- 传递物品
+        ---@alias noteOnItemDeliverData noteOnItemBase|{targetUnit:Unit}
+        Deliver = "itemDeliver",
         --- 抵押物品（持有人售出）
         ---@alias noteOnItemPawnData noteOnItemBase
         Pawn = "itemPawn",

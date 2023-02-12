@@ -252,6 +252,22 @@ INITIALIZATION = function()
                 effect.xyz(eff, mx, my, 2 + japi.Z(mx, my))
                 it.drop(mx, my)
             end
+        elseif (command == "item_deliver_cursor") then
+            async.call(syncPlayer, function()
+                local followData = Cursor().prop("followData") or {}
+                ---@type FrameCustom
+                local frame = followData.frame
+                if (instanceof(frame, "FrameCustom")) then
+                    japi.DzFrameSetAlpha(frame.handle(), frame.alpha())
+                end
+            end)
+            local itId = syncData.transferData[2]
+            local uId = syncData.transferData[3]
+            ---@type Item
+            local it = i2o(itId)
+            if (isObject(it, "Item")) then
+                it.deliver(i2o(uId))
+            end
         elseif (command == "item_to_warehouse") then
             local itId = syncData.transferData[2]
             ---@type Item
