@@ -24,16 +24,25 @@ LIGHTNING_TYPE = {
     thunderLite = { value = "CLSB", label = "闪电链次", effect = "BoltImpact" },
     thunderShot = { value = "CHIM", label = "闪电攻击", effect = "BoltImpact" },
     thunderFork = { value = "FORK", label = "叉状闪电", effect = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl" },
-    thunderRed = { value = "AFOD", label = "死亡之指", effect = "Abilities\\Spells\\Demon\\DemonBoltImpact\\DemonBoltImpact.mdl" },
+    thunderRed = { value = "AFOD", label = "死亡之指",
+        effect = "Abilities\\Spells\\Demon\\DemonBoltImpact\\DemonBoltImpact.mdl" },
     suck = { value = "DRAB", label = "汲取", effect = "Abilities\\Spells\\Human\\Feedback\\ArcaneTowerAttack.mdl" },
-    suckGreen = { value = "DRAL", label = "生命汲取", effect = "Abilities\\Spells\\Human\\Feedback\\ArcaneTowerAttack.mdl" },
-    suckBlue = { value = "DRAM", label = "魔法汲取", effect = "Abilities\\Spells\\Human\\Feedback\\ArcaneTowerAttack.mdl" },
-    cure = { value = "HWPB", label = "医疗波主", effect = "Abilities\\Spells\\Orc\\HealingWave\\HealingWaveTarget.mdl" },
-    cureLite = { value = "HWSB", label = "医疗波次", effect = "Abilities\\Spells\\Orc\\HealingWave\\HealingWaveTarget.mdl" },
-    soul = { value = "SPLK", label = "灵魂锁链", effect = "Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdl" },
-    manaBurn = { value = "MBUR", label = "法力燃烧", effect = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBoltImpact.mdl" },
-    manaFrame = { value = "MFPB", label = "魔力之焰", effect = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBoltImpact.mdl" },
-    manaChain = { value = "LEAS", label = "魔法镣铐", effect = "Abilities\\Spells\\Human\\Feedback\\SpellBreakerAttack.mdl" },
+    suckGreen = { value = "DRAL", label = "生命汲取",
+        effect = "Abilities\\Spells\\Human\\Feedback\\ArcaneTowerAttack.mdl" },
+    suckBlue = { value = "DRAM", label = "魔法汲取",
+        effect = "Abilities\\Spells\\Human\\Feedback\\ArcaneTowerAttack.mdl" },
+    cure = { value = "HWPB", label = "医疗波主",
+        effect = "Abilities\\Spells\\Orc\\HealingWave\\HealingWaveTarget.mdl" },
+    cureLite = { value = "HWSB", label = "医疗波次",
+        effect = "Abilities\\Spells\\Orc\\HealingWave\\HealingWaveTarget.mdl" },
+    soul = { value = "SPLK", label = "灵魂锁链",
+        effect = "Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdl" },
+    manaBurn = { value = "MBUR", label = "法力燃烧",
+        effect = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBoltImpact.mdl" },
+    manaFrame = { value = "MFPB", label = "魔力之焰",
+        effect = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBoltImpact.mdl" },
+    manaChain = { value = "LEAS", label = "魔法镣铐",
+        effect = "Abilities\\Spells\\Human\\Feedback\\SpellBreakerAttack.mdl" },
 }
 
 -- <ODDS>
@@ -90,7 +99,7 @@ DAMAGE_TYPE = {
     Physics_HE = { value = "Physics_HE", label = "物理-高爆" },
     Physics_APHE = { value = "Physics_APHE", label = "物理-破甲高爆" },
     Unknown = { value = "Unknown", label = "未知" },
-    real = { value = "real", label = "真实" },
+    Real = { value = "Real", label = "真实" },
 }
 
 ---@class DEFEND_TYPE 防御类型
@@ -105,7 +114,7 @@ DEFEND_TYPE = {
 }
 
 DEFEND_TYPE_KEYS = { "common" }
-DAMAGE_TYPE_KEYS = { "common" }
+DAMAGE_TYPE_KEYS = { "common", "Physics", "energy", "Physics_AP", "Physics_HE", "Physics_APHE", }
 ATTACK_TYPE_KEYS = { "common" }
 
 ---@class BREAK_ARMOR 无视防御种类
