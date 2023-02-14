@@ -17,6 +17,8 @@ function _.frameIndex() end
 function _.kit() end
 
 --- 自适应
+--- * 需要自适应的UI请在尺寸定位之前立即设为true
+--- * 如果在设置此数值后前已完成定位尺寸，可能初始时无法自适应
 ---@param modify boolean|nil
 ---@return self|boolean
 function _.adaptive(modify) end
