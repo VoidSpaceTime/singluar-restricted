@@ -186,6 +186,17 @@ function ability.leap(options)
             return
         end
         cPoint = nPoint
+        distanceCur = math.distance(cPoint[1], cPoint[2], tPoint[1], tPoint[2])
+        if (distanceCur > collision and distancePrev ~= nil) then
+            if ((distanceCur - distancePrev) > faraway) then
+                curTimer.destroy()
+                _leapEnding(false, options, cPoint)
+                return
+            end
+        end
+        if (distanceCur <= collision) then
+            cPoint = { tPoint[1], tPoint[2], tPoint[3] }
+        end
         if (type(options.onMove) == "function") then
             local mRes = options.onMove(options, cPoint)
             if (mRes == false) then
@@ -197,14 +208,6 @@ function ability.leap(options)
         sourceUnit.facing(math.angle(cPoint[1], cPoint[2], tPoint[1], tPoint[2]))
         sourceUnit.position(cPoint[1], cPoint[2])
         sourceUnit.flyHeight(cPoint[3])
-        distanceCur = math.distance(cPoint[1], cPoint[2], tPoint[1], tPoint[2])
-        if (distanceCur > collision and distancePrev ~= nil) then
-            if ((distanceCur - distancePrev) > faraway) then
-                curTimer.destroy()
-                _leapEnding(false, options, cPoint)
-                return
-            end
-        end
         distancePrev = distanceCur
         if (dt >= 1 or distanceCur <= collision) then
             curTimer.destroy()

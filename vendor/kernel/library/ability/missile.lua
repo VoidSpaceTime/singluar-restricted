@@ -183,6 +183,17 @@ function ability.missile(options)
             return
         end
         cPoint = nPoint
+        distanceCur = math.distance(cPoint[1], cPoint[2], tPoint[1], tPoint[2])
+        if (distanceCur > collision and distancePrev ~= nil) then
+            if ((distanceCur - distancePrev) > faraway) then
+                curTimer.destroy()
+                _missileEnding(false, options, cPoint)
+                return
+            end
+        end
+        if (distanceCur <= collision) then
+            cPoint = { tPoint[1], tPoint[2], tPoint[3] }
+        end
         if (type(options.onMove) == "function") then
             local mRes = options.onMove(options, cPoint)
             if (mRes == false) then
@@ -192,7 +203,6 @@ function ability.missile(options)
             end
         end
         fac = math.angle(cPoint[1], cPoint[2], tPoint[1], tPoint[2])
-        distanceCur = math.distance(cPoint[1], cPoint[2], tPoint[1], tPoint[2])
         rotateY = rotateY - dtRot * di
         if (math.distance(oriX, oriY, cPoint[1], cPoint[2]) > 2000) then
             japi.EXSetEffectZ(options.arrowToken, -9999)
@@ -211,13 +221,6 @@ function ability.missile(options)
         end
         japi.EXSetEffectZ(options.arrowToken, cPoint[3])
         fac0 = fac
-        if (distanceCur > collision and distancePrev ~= nil) then
-            if ((distanceCur - distancePrev) > faraway) then
-                curTimer.destroy()
-                _missileEnding(false, options, cPoint)
-                return
-            end
-        end
         distancePrev = distanceCur
         if (dt >= 1 or distanceCur <= collision) then
             curTimer.destroy()
