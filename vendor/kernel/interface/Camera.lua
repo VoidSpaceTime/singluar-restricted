@@ -18,7 +18,7 @@ function _.reset(duration) end
 ---@param x number
 ---@param y number
 ---@return self
-function _.quickPosition(x, y) end
+function _.spacePosition(x, y) end
 
 --- 移动到XY
 ---@param x number

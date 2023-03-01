@@ -512,7 +512,10 @@ player.evtKill = function(deadUnit)
     else
         --- 触发假死事件
         event.trigger(deadUnit, EVENT.Unit.FeignDead, { triggerUnit = deadUnit, sourceUnit = killer })
-        ability.reborn(deadUnit, rebornDelay, 3.476, deadUnit.x(), deadUnit.y(), true)
+        --- 新增判定,取消立即执行复活
+        if deadUnit.prop(CONST.UNIT_NOT_START_REBORN) ~= true then
+            ability.reborn(deadUnit, rebornDelay, 3.476, deadUnit.x(), deadUnit.y(), true)
+        end
     end
 end
 
