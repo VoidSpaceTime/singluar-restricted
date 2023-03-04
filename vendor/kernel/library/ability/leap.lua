@@ -119,12 +119,11 @@ function ability.leap(options)
 
     if (options.animate) then
         sourceUnit.animate(options.animate)
-    end
+    end 
 
     local flyHeight0 = sourceUnit.flyHeight()
     local animateDiff = (options.animateScale or 1) - sourceUnit.animateScale()
-    if options.buffOn == nil then options.buffOn = true end
-    if options.buffOn == false then
+    if options.buffOn == true then
         options.buff = Buff(sourceUnit, "leap", -1, 0,
             function(buffObj)
                 options.effectAttach = buffObj.attach(options.modelAlias, "origin", -1)
@@ -149,7 +148,6 @@ function ability.leap(options)
         )
         options.buff.purpose()
     end
-
     local dt = 0
     local distanceCur = distance0
     local distancePrev
