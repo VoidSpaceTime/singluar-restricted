@@ -1,0 +1,10 @@
+输入路径：D:\Temp\lua-model
+输出路径：D:\Temp\lua-model.w3x
+输入格式：Lni
+输出模式：obj
+结果：1 个错误，0 条警告
+用时：1.651 秒
+==========================
+严重错误 (1)
+==========================
+保存触发器失败 - attempt to index a nil value (global 'lang')
