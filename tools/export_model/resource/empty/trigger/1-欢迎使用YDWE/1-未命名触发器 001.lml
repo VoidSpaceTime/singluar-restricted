@@ -1,0 +1,8 @@
+事件
+    MapInitializationEvent
+条件
+动作
+    FogEnable
+        预设: EnabledDisabledDisabled
+    FogMaskEnable
+        预设: EnabledDisabledDisabled
