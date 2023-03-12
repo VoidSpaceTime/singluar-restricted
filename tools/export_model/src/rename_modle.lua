@@ -26,7 +26,6 @@ end
 local inputpath = arg[2]
 local outpath = arg[3] or arg[2]
 
-<<<<<<< HEAD
 local slua_path = 'F:\\Games\\war3map\\singluar_J'
 local sluatextures = "war3mapTextures"
 local sluaModel = "war3mapModel"
@@ -70,9 +69,6 @@ end
 ----------------------------------------------------------------------
 
 ----------------------------------------------------------------------
-=======
-local outpath = arg[3] or arg[2]
->>>>>>> origin/main
 -- 遍历文件目录内所有文件 返回表
 function seach_file(path)
     local file_list = {}
@@ -100,10 +96,7 @@ function seach_file(path)
     return file_list
 end
 
-<<<<<<< HEAD
 ----------------------------------------------------------------------
-=======
->>>>>>> origin/main
 -- local temp = fs.get(fs.DIR_TEMP) / "lua-model"
 
 -- --在临时路径下创建一个文件夹
@@ -112,7 +105,6 @@ end
 --     fs.create_directories(temp)
 --     print(temp,"临时文件的地址")
 -- end
-<<<<<<< HEAD
 local toTextuersS
 local toModelS
 if inputpath then
@@ -128,13 +120,10 @@ if inputpath then
     toModelS = fs.path(tmppath / sluaModel)
 end
 
-=======
->>>>>>> origin/main
 
 local filter = {
     -- [".exe"] = true,
     -- [".blp"] = true,
-<<<<<<< HEAD
     [".mdl"] = true,
     [".mdx"] = true,
 }
@@ -147,27 +136,18 @@ function renameMdxTexture(modelP, isExpand)
     end
     local modelF = fs.path(modelP)
     local index = 0
-=======
-    -- [".mdl"] = true,
-    [".mdx"] = true,
-}
-
-
--- 重命名模型贴图为模型名字的拓展
-function renameMdxTexture(model, isExpand)
->>>>>>> origin/main
     --迭代器 遍历模型所有贴图
     for texture in model:each_texture() do
         -- for key, value in pairs(texture) do
         --     print('\t', key, value)
         -- end
-<<<<<<< HEAD
         -- print(texture, texture.path)
         -- 判断模型纹理是否是原生的
         if not IsFileInMPQ(texture.path) then
             -- 判断纹理文件是否存在
-            print(modelF:parent_path() / fs.path(texture.path), fs.exists(modelF:parent_path() / fs.path(texture.path)),
-                fs.path(slua_path .. "\\assets\\" .. texture.path),fs.exists(fs.path(slua_path .. "\\assets\\" .. texture.path)), "存在")
+            -- print(modelF:parent_path() / fs.path(texture.path), fs.exists(modelF:parent_path() / fs.path(texture.path)),
+            --     fs.path(slua_path .. "\\assets\\" .. texture.path),
+            --     fs.exists(fs.path(slua_path .. "\\assets\\" .. texture.path)), "存在")
 
             if fs.exists(modelF:parent_path() / fs.path(texture.path)) or
                 fs.exists(fs.path(slua_path .. "\\assets\\" .. texture.path)) then
@@ -182,7 +162,7 @@ function renameMdxTexture(model, isExpand)
                     copyPath = fs.path((modelF:stem():string() .. "_" .. index) ..
                             fs.path(texture.path):extension():string()):string()
                 end
-                if fs.exists(tmppath) and not fs.is_directory(tmppath) then
+                if fs.exists(tmppath) and not fs.is_directory(tmppath) and not fs.exists(fs.path((toTextuersS .. '\\' .. copyPath))) then
                     -- print(tmppath, fs.path((toTextuersS .. '\\' .. copyPath)))
                     fs.copy_file(tmppath, fs.path((toTextuersS .. '\\' .. copyPath)))
                 end
@@ -230,9 +210,9 @@ end
 ---- 遍历文件
 local filesTable = seach_file(fs.path(inputpath))
 for index, file in ipairs(filesTable) do
-    -- print(file, "file")
     if filter[file:extension():string()] then
-        -- local model = lib.model.open(file:string())
+        -- print(file, "file")
+        --     -- local model = lib.model.open(file:string())
         if file ~= nil then
             renameMdxTexture(file:string())
         end
@@ -244,31 +224,6 @@ end
 -- for key, value in pairs(getmetatable(fs)) do
 --     if type(value) == "table" then
 --         ergodic(value)
-=======
-        print(texture, texture.path)
-        -- 判断模型纹理是否是原生的
-
-        -- 如果不是判断模型纹理地址是否存在，不存在则不处理模型路劲
-
-    end
-end
-
--- local mf = lib.model.open(fs.path("D:\\Games\\魔兽\\singluar\\assets\\war3mapModel\\Construct\\Construct_Art_2.mdx"))
-local mf = lib.model.open("Construct_antenna.mdx")
-renameMdxTexture(mf)
-inputpath = inputpath or 'D:\\Games\\魔兽\\singluar\\tools\\export_model\\bin'
-
-function ergodic(v)
-    for key, value in pairs(v) do
-        print(key, value)
-    end
-end
-
--- 打印绑定元表的函数
--- for key, value in pairs(getmetatable(mf)) do
---     if type(value) == "table" then
---         -- ergodic(value)
->>>>>>> origin/main
 --     end
 --     print(key, value)
 -- end
