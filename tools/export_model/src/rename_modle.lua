@@ -145,8 +145,9 @@ function renameMdxTexture(modelP, isExpand)
         -- 判断模型纹理是否是原生的
         if not IsFileInMPQ(texture.path) then
             -- 判断纹理文件是否存在
-            print(modelF:parent_path() / fs.path(texture.path), fs.exists(modelF:parent_path() / fs.path(texture.path)),
-                fs.path(slua_path .. "\\assets\\" .. texture.path),fs.exists(fs.path(slua_path .. "\\assets\\" .. texture.path)), "存在")
+            -- print(modelF:parent_path() / fs.path(texture.path), fs.exists(modelF:parent_path() / fs.path(texture.path)),
+            --     fs.path(slua_path .. "\\assets\\" .. texture.path),
+            --     fs.exists(fs.path(slua_path .. "\\assets\\" .. texture.path)), "存在")
 
             if fs.exists(modelF:parent_path() / fs.path(texture.path)) or
                 fs.exists(fs.path(slua_path .. "\\assets\\" .. texture.path)) then
@@ -161,7 +162,7 @@ function renameMdxTexture(modelP, isExpand)
                     copyPath = fs.path((modelF:stem():string() .. "_" .. index) ..
                             fs.path(texture.path):extension():string()):string()
                 end
-                if fs.exists(tmppath) and not fs.is_directory(tmppath) then
+                if fs.exists(tmppath) and not fs.is_directory(tmppath) and not fs.exists(fs.path((toTextuersS .. '\\' .. copyPath))) then
                     -- print(tmppath, fs.path((toTextuersS .. '\\' .. copyPath)))
                     fs.copy_file(tmppath, fs.path((toTextuersS .. '\\' .. copyPath)))
                 end
@@ -209,9 +210,9 @@ end
 ---- 遍历文件
 local filesTable = seach_file(fs.path(inputpath))
 for index, file in ipairs(filesTable) do
-    -- print(file, "file")
     if filter[file:extension():string()] then
-        -- local model = lib.model.open(file:string())
+        -- print(file, "file")
+        --     -- local model = lib.model.open(file:string())
         if file ~= nil then
             renameMdxTexture(file:string())
         end
