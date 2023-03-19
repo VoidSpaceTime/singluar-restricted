@@ -338,7 +338,8 @@ function math.evenlyDispersed(x, y, radius)
     random = math.rand(1, 100) / 100
     local o = 2 * math.pi * random
 
-    local x, y = x + r * math.cos(o), y + r * math.sin(o) -- *0.5 ,想要椭圆的话,偏移量*比例系数
+    x = x + r * math.cos(o)
+    y = y + r * math.sin(o) -- *0.5 ,想要椭圆的话,偏移量*比例系数
     return x, y
 end
 
