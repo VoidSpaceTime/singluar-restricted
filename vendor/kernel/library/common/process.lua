@@ -43,6 +43,8 @@ function Process(name)
             end
             if (value == nil) then
                 return this._stage.get(key)
+            elseif (value == NIL) then
+                value = nil
             end
             this._stage.set(key, value)
         end

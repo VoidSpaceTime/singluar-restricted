@@ -10,12 +10,13 @@
         { value = "Q", label = "第1个" },
         { value = "W", label = "第2个" },
         { value = "D", label = "第3个" },
+        { value = 3, label = "第3个", hotkey = "D" },
     }
 ]]
 
 ---@class Dialog:Object
 ---@param title string
----@alias noteDialogAction fun(evtData:{triggerPlayer:Player,triggerDialog:Dialog,label:"标签",value:"值",hotkey:"热键"}):void
+---@alias noteDialogAction fun(evtData:{triggerPlayer:Player,triggerDialog:Dialog,label:"标签",value:"值"}):void
 ---@param options table
 ---@param action noteDialogAction | "function(evtData) end"
 ---@return Dialog

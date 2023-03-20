@@ -40,13 +40,7 @@ INITIALIZATION = function()
     japi.DzFrameHideInterface()
     japi.DzLoadToc("UI\\singluar_frame.toc")
     --- 预读技能
-    local pr = {}
-    for _, v in ipairs(SINGLUAR_ID["sight_gradient"]) do
-        table.insert(pr, SINGLUAR_ID["sight"].add[v])
-        table.insert(pr, SINGLUAR_ID["sight"].sub[v])
-    end
-    local u = J.CreateUnit(J.Player(PLAYER_NEUTRAL_PASSIVE), SINGLUAR_ID["unit_token"], 0, 0, 0)
-    J.handleRef(u)
+    local u = JassGlobals["prevReadToken"]
     for _, v in ipairs(SINGLUAR_ID["sight_gradient"]) do
         J.UnitAddAbility(u, SINGLUAR_ID["sight"].add[v])
         J.UnitAddAbility(u, SINGLUAR_ID["sight"].sub[v])
@@ -54,7 +48,6 @@ INITIALIZATION = function()
         J.UnitRemoveAbility(u, SINGLUAR_ID["sight"].sub[v])
     end
     J.RemoveUnit(u)
-    J.handleUnRef(u)
 
     --- 默认区域
     local wb = J.GetWorldBounds()
