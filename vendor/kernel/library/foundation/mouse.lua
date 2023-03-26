@@ -36,7 +36,7 @@ function mouse.evt(name, typ, btn, status, key, callFunc)
                     data.delta = japi.DzGetWheelDelta()
                 end
                 async.call(data.triggerPlayer, function()
-                    mouse._evt[name].forEach(function(k, v)
+                    mouse._evt[name].backEach(function(k, v)
                         promise(v, nil, nil, data)
                     end)
                 end)

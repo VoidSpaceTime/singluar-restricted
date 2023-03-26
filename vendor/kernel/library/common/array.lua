@@ -132,13 +132,15 @@ function Array()
             local i = #keys
             while i >= 1 do
                 local key = keys[i]
-                local val = this._d.k2v[key]
-                if val == nil then
-                    table.remove(this._d.key, i)
-                    this._d.k2v[key] = nil
-                else
-                    if (false == callFunc(key, val)) then
-                        break
+                if (key ~= nil) then
+                    local val = this._d.k2v[key]
+                    if val == nil then
+                        table.remove(this._d.key, i)
+                        this._d.k2v[key] = nil
+                    else
+                        if (false == callFunc(key, val)) then
+                            break
+                        end
                     end
                 end
                 i = i - 1

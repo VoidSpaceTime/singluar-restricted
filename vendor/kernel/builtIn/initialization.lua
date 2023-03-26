@@ -72,7 +72,7 @@ INITIALIZATION = function()
 
     --- Z
     local xMax = RectWorld.xMax()
-    local yMax = RectWorld.xMax()
+    local yMax = RectWorld.yMax()
     x = RectWorld.xMin()
     local loc = J.Location(0, 0)
     J.handleRef(loc)

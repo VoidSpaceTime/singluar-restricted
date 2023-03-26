@@ -1,4 +1,3 @@
-* 【document】[https://singluar.hunzsig.org](https://singluar.hunzsig.org)
 * 【assets】[https://github.com/singluar/assets](https://github.com/singluar/assets) 【necessary】
 * 【assetsNew】[https://github.com/singluar/assetsNew](https://github.com/singluar/assetsNew)【necessary】
 * 【domo】[https://github.com/singluar/s-zero](https://github.com/singluar/s-zero)
