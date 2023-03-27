@@ -96,7 +96,7 @@ function _.description(modify) end
 function _.period(modify) end
 
 --- 是否消耗品
---- 默认true
+--- 默认false
 --- 消耗品的数目小于1时，物品会自动销毁
 ---@param modify boolean|nil
 ---@return self|boolean

@@ -33,7 +33,7 @@ function enchant.append(targetUnit, sourceUnit, enchantTypes)
                     if (lv > 0) then
                         -- 如果有反应式，先消除旧附魔元素
                         local buffs = BuffCatcher(targetUnit, {
-                            name = "prop_<APPEND>e_" .. ek,
+                            key = "prop_<APPEND>e_" .. ek,
                             filter = function(enumBuff)
                                 return enumBuff.duration() > 0
                             end,
