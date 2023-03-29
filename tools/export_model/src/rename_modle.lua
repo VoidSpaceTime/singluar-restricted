@@ -9,6 +9,36 @@ require "filesystem"
 
 string = string or {}
 
+-- 是否中文
+function isContainChinese(str)
+    local utf8_len = #str
+    local len = string.len(str)
+    if utf8_len ~= len then
+        return true
+    end
+    for i = 1, len do
+        local byte = string.byte(str, i)
+        if byte > 127 then
+            return true
+        end
+    end
+    return false
+end
+
+-- 替换中文
+function replaceChinese(str)
+    local new_str = ""
+    for i = 1, string.len(str) do
+        local byte = string.byte(str, i)
+        if byte > 127 then
+            new_str = new_str .. string.char(math.random(97, 122))
+        else
+            new_str = new_str .. string.char(byte)
+        end
+    end
+    return new_str
+end
+
 --- 替换字符串
 ---@param str string
 ---@return string
@@ -127,14 +157,30 @@ local filter = {
     [".mdl"] = true,
     [".mdx"] = true,
 }
-
+local modelIdx = 1
 -- 模型贴图为模型名字的拓展
 function renameMdxTexture(modelP, isExpand)
-    local model = lib.model.open(modelP)
+    -- local model = lib.model.open(modelP:string())
+    local model = lib.model.open(string.replace(modelP:string(), "\\", "\\\\"))
     if model == nil then
+        print("nil", modelIdx, modelP:string())
+        modelIdx = modelIdx + 1
         return
     end
-    local modelF = fs.path(modelP)
+    local modelF = modelP
+    -- 文件名_序号
+    local str = modelF:stem():string() .. modelIdx
+    -- 是否存在中文, 替换中文
+    if isContainChinese(str) then
+        str = replaceChinese(str)
+    end
+
+    -- print(str)
+
+    print("save", str, modelIdx, modelP:string())
+    -- 模型储存路径
+    local model_path_to = fs.path(toModelS / (str .. ".mdx"))
+    model:save(model_path_to:string())
     local index = 0
     --迭代器 遍历模型所有贴图
     for texture in model:each_texture() do
@@ -148,34 +194,89 @@ function renameMdxTexture(modelP, isExpand)
             -- print(modelF:parent_path() / fs.path(texture.path), fs.exists(modelF:parent_path() / fs.path(texture.path)),
             --     fs.path(slua_path .. "\\assets\\" .. texture.path),
             --     fs.exists(fs.path(slua_path .. "\\assets\\" .. texture.path)), "存在")
-
-            if fs.exists(modelF:parent_path() / fs.path(texture.path)) or
-                fs.exists(fs.path(slua_path .. "\\assets\\" .. texture.path)) then
-                local toPath = fs.path(sluatextures .. "\\" .. (modelF:stem():string() .. "_" .. index) .. ".blp")
-                    :string()
-                local copyPath = fs.path((modelF:stem():string() .. "_" .. index) ..
-                        fs.path(texture.path):extension():string())
-                    :string()
-                local tmppath = fs.path(modelF:parent_path() / fs.path(texture.path))
-                if fs.exists(fs.path(slua_path .. "\\assets\\" .. texture.path)) then
-                    tmppath = fs.path(slua_path .. "\\assets\\" .. texture.path)
-                    copyPath = fs.path((modelF:stem():string() .. "_" .. index) ..
-                            fs.path(texture.path):extension():string()):string()
-                end
-                if fs.exists(tmppath) and not fs.is_directory(tmppath) and not fs.exists(fs.path((toTextuersS .. '\\' .. copyPath))) then
-                    -- print(tmppath, fs.path((toTextuersS .. '\\' .. copyPath)))
-                    fs.copy_file(tmppath, fs.path((toTextuersS .. '\\' .. copyPath)))
-                end
-                texture.path = toPath
+            -- 拼接贴图路径
+            local texture_path = fs.path(modelF:parent_path() / texture.path)
+            local texture_path2 = fs.path(modelF:parent_path() / string.lower(texture.path))
+            -- 若贴图存在 同一路径,或slua路径
+            local falg = false
+            if fs.exists(texture_path2) == true and fs.is_directory(texture_path) == false then
+                texture_path = texture_path2
+                falg = true
+            elseif fs.exists(texture_path) == true then
+                falg = true
+            end
+            if (string.lower(texture_path:extension():string()) == ".blp" or string.lower(texture_path:extension():string()) == ".tag")
+                and falg == true then
+                falg = true
             else
-                print("贴图不存在")
+                falg = false
+            end
+            if falg
+            -- or fs.exists(fs.path(slua_path .. "\\assets\\" .. texture.path))
+            then
+                -- -- 更改成数值试试
+                -- local toPath = fs.path(((modelIdx .. "_" .. index) .. ".blp"))
+                --     :string()
+                -- local copyPath = fs.path((modelF:stem():string() .. "_" .. index) ..
+                --         fs.path(texture.path):extension():string())
+                --     :string()
+                -----------------
+                -- local copyPath = fs.path((modelIdx .. "_" .. index) .. fs.path(texture.path):extension():string()):string()
+                -- local tmppath = fs.path(modelF:parent_path() / fs.path(texture.path))
+                -- -- 计划适用于slua
+                -- if fs.exists(fs.path(slua_path .. "\\assets\\" .. texture.path)) then
+                --     tmppath = fs.path(slua_path .. "\\assets\\" .. texture.path)
+                --     copyPath = fs.path((modelF:stem():string() .. "_" .. index) ..
+                --         fs.path(texture.path):extension():string()):string()
+                -- end
+                -- if fs.exists(tmppath) and not fs.is_directory(tmppath) and not fs.exists(fs.path((toTextuersS .. '\\' .. copyPath))) then
+                --     -- print(tmppath, fs.path((toTextuersS .. '\\' .. copyPath)))
+                --     fs.copy_file(tmppath, fs.path((toTextuersS .. '\\' .. copyPath)))
+                -- end
+                -- texture.path = toPath
+                ----------------- 这段重写
+                -- -- 定义贴图名字
+                -- local copyPath = fs.path((modelF:stem():string() .. "_" .. index) ..
+                --     fs.path(modelF:parent_path() / texture.path):extension():string()):string()
+                -- -- 获取贴图路径
+                -- local tmppath = fs.path(modelF:parent_path() / texture.path)
+                -- if fs.exists(tmppath) == true then
+                --     fs.copy_file(tmppath, fs.path(toTextuersS .. "\\" .. copyPath), true)
+                -- end
+                -- print(texture_path:string())
+
+                -- 重新命名 模型中贴图路径
+                -- local toPath = fs.path((sluatextures .. "\\" .. (modelF:stem():string() .. "_" .. index) .. ".blp"))
+                local toPath = fs.path((sluatextures .. "\\" .. (str .. "_" .. index) .. ".blp"))
+                -- 复制贴图到整理好的贴图文件
+                -- if fs.exists(toPath) then
+
+                -- end
+                local toPath_ = fs.path(toTextuersS .. "\\" .. ((str .. "_" .. index) .. ".blp"))
+                -- print("texture", texture_path, toPath_)
+                fs.copy_file(texture_path, toPath_)
+
+                --新建一张空贴图
+                local textureNew = lib.texture.new()
+                local textureId = texture.replaceable_id
+
+                --设置贴图路径
+                textureNew.path = sluatextures .. "\\" .. (str .. "_" .. index) .. ".blp"
+                texture.path = sluatextures .. "\\" .. (str .. "_" .. index) .. ".blp"
+
+                --设置贴图id
+                textureNew.replaceable_id = textureId
+                model:add_texture(textureNew)
+
+            else
+                print("贴图不存在", modelF, fs.path(modelF:parent_path() / texture.path))
+                -- return
             end
         end
         index = index + 1
     end
-
-    model:save(fs.path(toModelS / (modelF:stem():string() .. ".mdx")):string())
     model:close()
+    modelIdx = modelIdx + 1
 end
 
 -- local mf = lib.model.open(fs.path("D:\\Games\\魔兽\\singluar\\assets\\war3mapModel\\Construct\\Construct_Art_2.mdx"))
@@ -211,11 +312,11 @@ end
 local filesTable = seach_file(fs.path(inputpath))
 for index, file in ipairs(filesTable) do
     if filter[file:extension():string()] then
-        -- print(file, "file")
+        -- print(index, file, "file")
         --     -- local model = lib.model.open(file:string())
-        if file ~= nil then
-            renameMdxTexture(file:string())
-        end
+        -- if file ~= nil then
+        renameMdxTexture(file)
+        -- end
     end
 end
 
